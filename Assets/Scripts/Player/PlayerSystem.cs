@@ -41,7 +41,6 @@ namespace Player
 
         private void FixedUpdate()
         {
-            Debug.Log(_direction);
             var cameraForward = VisionCamera.transform.forward;
             cameraForward.y = 0;
             cameraForward.Normalize();
@@ -50,7 +49,6 @@ namespace Player
             movementDirection.Normalize();
 
             var velocity = movementDirection * _speed;
-            Debug.Log(velocity);
             
             _rigidbody.velocity = new Vector3(velocity.x, _rigidbody.velocity.y, velocity.z);
 

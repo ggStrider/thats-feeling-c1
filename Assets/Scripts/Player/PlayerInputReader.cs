@@ -25,7 +25,6 @@ namespace Player
         
         private void OnMovement(InputAction.CallbackContext context)
         {
-            Debug.Log("hi");
             var direction = context.ReadValue<Vector2>();
             _playerSystem.SetDirection(direction);
         }
