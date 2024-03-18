@@ -47,7 +47,7 @@ namespace Player
             }
         }
         
-        public void RestrictMainMove(bool isRestricted)
+        public void RestrictMoving(bool isRestricted)
         {
             if (isRestricted)
             {

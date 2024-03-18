@@ -5,7 +5,7 @@ namespace Events
 {
     public class InvokeUnityEvent : MonoBehaviour
     {
-        [SerializeField] private UnityEvent _action;
+        [field: SerializeField] public UnityEvent unityEvent;
 
         [Space] [SerializeField] private bool _canInvoke;
         [SerializeField] private bool _canInvokeOnce;
@@ -22,7 +22,7 @@ namespace Events
         {
             if (!_canInvoke) return;
 
-            _action?.Invoke();
+            unityEvent?.Invoke();
             if(_canInvokeOnce) 
             { 
                 _canInvoke = false; 

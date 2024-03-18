@@ -1,23 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-    [SerializeField] private float _myValue = 1;
+    [SerializeField] private bool _canDoSomething;
 
-    [ContextMenu("change")]
-    void onchange()
+    public void _SetCanDoSomething(bool canDoSomething)
     {
-        StartCoroutine(change());
-    }
-
-    IEnumerator change()
-    {
-        while (_myValue > 0)
-        {
-            _myValue = Mathf.Clamp01(_myValue - 0.01f);
-            Debug.Log(_myValue);
-            yield return null;
-        }
+        _canDoSomething = canDoSomething;
     }
 }

@@ -6,7 +6,7 @@ namespace Player
     public class PlayerSetSettings : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera _vcamCinemachine;
-        public bool CanInteract { get; private set; } 
+        [field: SerializeField] public bool CanInteract { get; private set; } = true; 
             
         private Rigidbody _rigidbody;
         
