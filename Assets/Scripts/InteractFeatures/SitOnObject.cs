@@ -1,4 +1,3 @@
-using Events;
 using UnityEngine;
 
 using Player;
@@ -22,10 +21,6 @@ namespace InteractFeatures
 
         [field:SerializeField, Space] public bool CanSit { private get; set; } 
         [field:SerializeField] public bool CanGetUp { private get; set; }
-
-#if UNITY_EDITOR
-        [SerializeField] private bool _connectToUnityEvent;
-#endif
         
         [ContextMenu("sit")]
         public async void _Sit()
@@ -73,12 +68,6 @@ namespace InteractFeatures
         private void OnValidate()
         {
             _player = GameObject.FindGameObjectWithTag("Player");
-
-            if (!_connectToUnityEvent) return;
-            
-            var unityEvent = GetComponent<InvokeUnityEvent>();
-            unityEvent.unityEvent.RemoveListener(_Sit);
-            unityEvent.unityEvent.AddListener(_Sit);
         }
 #endif
     }

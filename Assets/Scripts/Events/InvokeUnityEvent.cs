@@ -7,7 +7,7 @@ namespace Events
     {
         [field: SerializeField] public UnityEvent unityEvent;
 
-        [Space] [SerializeField] private bool _canInvoke;
+        [Space] [SerializeField] private bool _canInvoke = true;
         [SerializeField] private bool _canInvokeOnce;
 
         [Space] [SerializeField] private bool _invokeOnStart;
@@ -24,7 +24,7 @@ namespace Events
 
             unityEvent?.Invoke();
             if(_canInvokeOnce) 
-            { 
+            {
                 _canInvoke = false; 
             }
         }

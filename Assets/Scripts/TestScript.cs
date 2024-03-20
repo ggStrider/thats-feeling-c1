@@ -2,10 +2,7 @@
 
 public class TestScript : MonoBehaviour
 {
-    [SerializeField] private bool _canDoSomething;
-
-    public void _SetCanDoSomething(bool canDoSomething)
+    public void smth()
     {
-        _canDoSomething = canDoSomething;
     }
 }
