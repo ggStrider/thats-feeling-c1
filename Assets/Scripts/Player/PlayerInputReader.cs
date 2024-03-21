@@ -16,11 +16,17 @@ namespace Player
             _playerMap.PlayerActionMap.Movement.canceled += OnMovement;
 
             _playerMap.PlayerActionMap.Interact.started += OnInteract;
+            _playerMap.PlayerActionMap.CheckShoppingList.started += OnCheckShoppingList;
         
             _playerMap.Enable();
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        private void OnCheckShoppingList(InputAction.CallbackContext context)
+        {
+            _playerSystem.CheckShoppingList();
         }
         
         private void OnMovement(InputAction.CallbackContext context)

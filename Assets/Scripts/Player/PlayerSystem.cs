@@ -13,6 +13,7 @@ namespace Player
 
         [field:SerializeField] public Camera VisionCamera { get; private set; }
         [SerializeField] private CheckObjectsInRay _checkInRay;
+        [SerializeField] private CheckShoppingList _checkShoppingList;
 
         private PlayerSetSettings _playerSetSettings;
         private Rigidbody _rigidbody;
@@ -37,6 +38,11 @@ namespace Player
 
             if (objectInvokeComponent == null) return;
             objectInvokeComponent._InvokeEvent();
+        }
+
+        public void CheckShoppingList()
+        {
+            _checkShoppingList.ToggleAnimation();
         }
 
         private void FixedUpdate()
@@ -64,6 +70,7 @@ namespace Player
             _rigidbody = GetComponent<Rigidbody>();
             _playerSetSettings = GetComponent<PlayerSetSettings>();
             _checkInRay = GetComponent<CheckObjectsInRay>();
+            _checkShoppingList = GetComponent<CheckShoppingList>();
         }
 #endif
     }
