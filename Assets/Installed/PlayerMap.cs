@@ -134,6 +134,114 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""22cf94e0-b330-440e-9b18-8453d6c63c61"",
+            ""actions"": [
+                {
+                    ""name"": ""ArrowUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""fffa1249-87ff-4f7c-be4b-cb0250b98bc2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ArrowDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb2f57b2-4f7f-494b-9bd8-17a0e2b8e787"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ArrowRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae6c2ff3-be67-4006-8115-f0a08622fe98"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ArrowLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd6624cd-701f-4823-8cbb-411ceab63937"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""94f52721-f35a-44c8-bee5-aeaab6ff7b39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b8f9a4d5-d5ed-473b-89bf-fac3dfa0f4ee"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""308e5605-ac77-41d9-b2b2-3ea33bb9ba11"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15bca41e-55e2-431c-85c1-d22ad25b751e"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37f4d1cd-509c-4234-a0bb-2dbb598811d7"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d365870-fc02-47a2-80b6-4c61e73caa83"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ArrowRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -143,6 +251,13 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
         m_PlayerActionMap_Movement = m_PlayerActionMap.FindAction("Movement", throwIfNotFound: true);
         m_PlayerActionMap_Interact = m_PlayerActionMap.FindAction("Interact", throwIfNotFound: true);
         m_PlayerActionMap_CheckShoppingList = m_PlayerActionMap.FindAction("CheckShoppingList", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_ArrowUp = m_UI.FindAction("ArrowUp", throwIfNotFound: true);
+        m_UI_ArrowDown = m_UI.FindAction("ArrowDown", throwIfNotFound: true);
+        m_UI_ArrowRight = m_UI.FindAction("ArrowRight", throwIfNotFound: true);
+        m_UI_ArrowLeft = m_UI.FindAction("ArrowLeft", throwIfNotFound: true);
+        m_UI_Enter = m_UI.FindAction("Enter", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,10 +377,96 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionMapActions @PlayerActionMap => new PlayerActionMapActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_ArrowUp;
+    private readonly InputAction m_UI_ArrowDown;
+    private readonly InputAction m_UI_ArrowRight;
+    private readonly InputAction m_UI_ArrowLeft;
+    private readonly InputAction m_UI_Enter;
+    public struct UIActions
+    {
+        private @PlayerMap m_Wrapper;
+        public UIActions(@PlayerMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ArrowUp => m_Wrapper.m_UI_ArrowUp;
+        public InputAction @ArrowDown => m_Wrapper.m_UI_ArrowDown;
+        public InputAction @ArrowRight => m_Wrapper.m_UI_ArrowRight;
+        public InputAction @ArrowLeft => m_Wrapper.m_UI_ArrowLeft;
+        public InputAction @Enter => m_Wrapper.m_UI_Enter;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @ArrowUp.started += instance.OnArrowUp;
+            @ArrowUp.performed += instance.OnArrowUp;
+            @ArrowUp.canceled += instance.OnArrowUp;
+            @ArrowDown.started += instance.OnArrowDown;
+            @ArrowDown.performed += instance.OnArrowDown;
+            @ArrowDown.canceled += instance.OnArrowDown;
+            @ArrowRight.started += instance.OnArrowRight;
+            @ArrowRight.performed += instance.OnArrowRight;
+            @ArrowRight.canceled += instance.OnArrowRight;
+            @ArrowLeft.started += instance.OnArrowLeft;
+            @ArrowLeft.performed += instance.OnArrowLeft;
+            @ArrowLeft.canceled += instance.OnArrowLeft;
+            @Enter.started += instance.OnEnter;
+            @Enter.performed += instance.OnEnter;
+            @Enter.canceled += instance.OnEnter;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @ArrowUp.started -= instance.OnArrowUp;
+            @ArrowUp.performed -= instance.OnArrowUp;
+            @ArrowUp.canceled -= instance.OnArrowUp;
+            @ArrowDown.started -= instance.OnArrowDown;
+            @ArrowDown.performed -= instance.OnArrowDown;
+            @ArrowDown.canceled -= instance.OnArrowDown;
+            @ArrowRight.started -= instance.OnArrowRight;
+            @ArrowRight.performed -= instance.OnArrowRight;
+            @ArrowRight.canceled -= instance.OnArrowRight;
+            @ArrowLeft.started -= instance.OnArrowLeft;
+            @ArrowLeft.performed -= instance.OnArrowLeft;
+            @ArrowLeft.canceled -= instance.OnArrowLeft;
+            @Enter.started -= instance.OnEnter;
+            @Enter.performed -= instance.OnEnter;
+            @Enter.canceled -= instance.OnEnter;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActionMapActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnCheckShoppingList(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnArrowUp(InputAction.CallbackContext context);
+        void OnArrowDown(InputAction.CallbackContext context);
+        void OnArrowRight(InputAction.CallbackContext context);
+        void OnArrowLeft(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
     }
 }
