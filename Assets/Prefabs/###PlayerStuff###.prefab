@@ -247,7 +247,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vcamCinemachine: {fileID: 2152230273171210643}
+  <CanInteract>k__BackingField: 1
 --- !u!114 &2152230273291980244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +354,7 @@ MonoBehaviour:
   _rayCheckDistance: 4
   <VisionCamera>k__BackingField: {fileID: 2152230273592148758}
   _checkInRay: {fileID: 2152230273291980238}
+  _checkShoppingList: {fileID: 0}
 --- !u!1 &2152230273473556306
 GameObject:
   m_ObjectHideFlags: 0
