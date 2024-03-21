@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Linq;
 
-namespace Model
+namespace DataModel
 {
     public class GameSession : MonoBehaviour
     {

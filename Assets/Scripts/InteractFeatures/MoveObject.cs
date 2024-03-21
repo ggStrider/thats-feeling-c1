@@ -49,15 +49,17 @@ namespace InteractFeatures
             if (!moveOnPath)
                 path = -_path;
                 
-            var newPosition = _objectToMove.position + path;
+            var newPosition = _objectToMove.localPosition + path;
             var elapsedTime = .0f;
             
             while (elapsedTime < _moveDeltaDuration)
             {
-                _objectToMove.position = Vector3.Lerp(_objectToMove.position, newPosition, elapsedTime / _moveDeltaDuration);
+                _objectToMove.localPosition = Vector3.Lerp(_objectToMove.localPosition, newPosition, elapsedTime / _moveDeltaDuration);
                 elapsedTime += Time.deltaTime;
                 await Task.Yield();
             }
+
+            _objectToMove.localPosition = newPosition;
         }
 
         private async void DelayUsing()

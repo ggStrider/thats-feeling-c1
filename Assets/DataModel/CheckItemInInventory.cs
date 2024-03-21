@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Model
+namespace DataModel
 {
     public class CheckItemInInventory : MonoBehaviour
     {
