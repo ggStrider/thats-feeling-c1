@@ -10,5 +10,7 @@ namespace DataModel
     {
         public List<GameObject> InventoryItems;
         public GameObject ObjectInHand;
+
+        public List<int> Decisions = new List<int>();
     }
 }

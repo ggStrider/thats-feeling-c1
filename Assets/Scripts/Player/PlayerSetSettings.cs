@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using InteractFeatures;
 using UnityEngine;
 
 namespace Player
@@ -6,7 +7,8 @@ namespace Player
     public class PlayerSetSettings : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera _vcamCinemachine;
-        [field: SerializeField] public bool CanInteract { get; private set; } = true; 
+        [field: SerializeField] public bool CanInteract { get; private set; } = true;
+        public SitOnObject currentSitComponent;
             
         private Rigidbody _rigidbody;
         

@@ -17,11 +17,17 @@ namespace Player
 
             _playerMap.PlayerActionMap.Interact.started += OnInteract;
             _playerMap.PlayerActionMap.CheckShoppingList.started += OnCheckShoppingList;
+            _playerMap.PlayerActionMap.GetUp.started += OnGetUp;
         
             _playerMap.Enable();
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        private void OnGetUp(InputAction.CallbackContext obj)
+        {
+            _playerSystem.GetUp();
         }
 
         private void OnCheckShoppingList(InputAction.CallbackContext context)
@@ -40,7 +46,7 @@ namespace Player
             _playerSystem.Interact();
         }
         
-        public void SetLock(bool isLocked)
+        public void _TogglePlayerInputMap(bool isLocked)
         {
             if (isLocked)
             {

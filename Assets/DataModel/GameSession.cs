@@ -69,5 +69,20 @@ namespace DataModel
             var go = _data.ObjectInHand;
             Destroy(go);
         }
+
+        public GameObject GetObjectInHand()
+        {
+            return _data.ObjectInHand;
+        }
+
+        public void MakeDecision(int index)
+        {
+            _data.Decisions.Add(index);
+        }
+
+        public int GetDecision(int index)
+        {
+            return _data.Decisions[index];
+        }
     }
 }

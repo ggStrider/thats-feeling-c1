@@ -43,8 +43,8 @@ namespace InteractFeatures
                 return;
             }
             
-            _objectToTake.transform.parent = _place;
             _objectToTake.transform.localScale = _size;
+            _objectToTake.transform.parent = _place;
             
             _objectToTake.transform.SetLocalPositionAndRotation(_putOffset, Quaternion.Euler(_rotationOffset));
             _onTake?.Invoke();

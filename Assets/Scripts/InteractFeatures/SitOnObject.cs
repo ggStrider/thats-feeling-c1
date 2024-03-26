@@ -19,14 +19,17 @@ namespace InteractFeatures
         [SerializeField] private bool _fadeOnChangeState;
         [SerializeField] private Fader _fader;
 
-        [field:SerializeField, Space] public bool CanSit { private get; set; } 
-        [field:SerializeField] public bool CanGetUp { private get; set; }
+        [Space, SerializeField] public bool CanSit;
+        [SerializeField] public bool CanGetUp;
         
         [ContextMenu("sit")]
         public async void _Sit()
         {
             if(!CanSit) return;
             CanSit = false;
+
+            var playerSetSettings = FindObjectOfType<PlayerSetSettings>();
+            playerSetSettings.currentSitComponent = this;
             
             ChangeState(true);
             if(_fadeOnChangeState)
@@ -44,6 +47,9 @@ namespace InteractFeatures
         {
             if(!CanGetUp) return;
             CanGetUp = false;
+
+            var playerSetSettings = FindObjectOfType<PlayerSetSettings>();
+            playerSetSettings.currentSitComponent = null;
             
             ChangeState(false);
             if(_fadeOnChangeState)

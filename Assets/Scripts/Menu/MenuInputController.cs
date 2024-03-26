@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using System;
 using System.Collections.Generic;
 using Events;
+using Sounds;
 
 namespace Menu
 {
@@ -15,6 +16,8 @@ namespace Menu
         [SerializeField] private MenuCategories _currentCategory;
         
         [SerializeField] private float _changeSliderValueDelta = 0.1f;
+
+        [SerializeField] private PlayRandomSound _doKeyboardSound;
         
         private int _currentButtonIndex;
         
@@ -77,7 +80,7 @@ namespace Menu
             slider.value -= _changeSliderValueDelta;
 
             if(slider.value <= slider.minValue) return;
-            //_randomKeyboardButtonSound._Play();
+            _doKeyboardSound._PlayRandomSound();
         }
 
         private void OnArrowRight(InputAction.CallbackContext obj)
@@ -86,7 +89,7 @@ namespace Menu
             slider.value += _changeSliderValueDelta;
             
             if(slider.value >= slider.maxValue) return;
-            //_randomKeyboardButtonSound._Play();
+            _doKeyboardSound._PlayRandomSound();
         }
 
         public void _DisableMap()
@@ -107,13 +110,13 @@ namespace Menu
 
         private void OnSelect(InputAction.CallbackContext obj)
         {
-            //_randomKeyboardButtonSound._Play();
+            _doKeyboardSound._PlayRandomSound();
 
             var objectEvent = _categories[(int)_currentCategory].ObjectsToSetup[_currentButtonIndex]
                 .GetComponent<InvokeUnityEvent>();
             
             if(objectEvent == null) return;
-            //objectEvent.InvokeEvent();
+            objectEvent._InvokeEvent();
         }
 
         private void OnArrowDown(InputAction.CallbackContext obj)
@@ -127,7 +130,7 @@ namespace Menu
             CheckIsSlider();
             ReColorUI();
             
-            //_randomKeyboardButtonSound._Play();
+            _doKeyboardSound._PlayRandomSound();
         }
 
         private void CheckIsSlider()
@@ -154,7 +157,7 @@ namespace Menu
             CheckIsSlider();
             ReColorUI();
             
-            //_randomKeyboardButtonSound._Play();
+            _doKeyboardSound._PlayRandomSound();
         }
 
         private void ReColorUI()

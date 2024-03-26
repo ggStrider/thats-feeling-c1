@@ -53,6 +53,15 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GetUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e52118a-3c07-44c4-9184-aec0b14a2ef7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CheckShoppingList"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""367397b9-1594-4c3e-8a17-aaff1790c2bb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GetUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -251,6 +271,7 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
         m_PlayerActionMap_Movement = m_PlayerActionMap.FindAction("Movement", throwIfNotFound: true);
         m_PlayerActionMap_Interact = m_PlayerActionMap.FindAction("Interact", throwIfNotFound: true);
         m_PlayerActionMap_CheckShoppingList = m_PlayerActionMap.FindAction("CheckShoppingList", throwIfNotFound: true);
+        m_PlayerActionMap_GetUp = m_PlayerActionMap.FindAction("GetUp", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_ArrowUp = m_UI.FindAction("ArrowUp", throwIfNotFound: true);
@@ -322,6 +343,7 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActionMap_Movement;
     private readonly InputAction m_PlayerActionMap_Interact;
     private readonly InputAction m_PlayerActionMap_CheckShoppingList;
+    private readonly InputAction m_PlayerActionMap_GetUp;
     public struct PlayerActionMapActions
     {
         private @PlayerMap m_Wrapper;
@@ -329,6 +351,7 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerActionMap_Movement;
         public InputAction @Interact => m_Wrapper.m_PlayerActionMap_Interact;
         public InputAction @CheckShoppingList => m_Wrapper.m_PlayerActionMap_CheckShoppingList;
+        public InputAction @GetUp => m_Wrapper.m_PlayerActionMap_GetUp;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -347,6 +370,9 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
             @CheckShoppingList.started += instance.OnCheckShoppingList;
             @CheckShoppingList.performed += instance.OnCheckShoppingList;
             @CheckShoppingList.canceled += instance.OnCheckShoppingList;
+            @GetUp.started += instance.OnGetUp;
+            @GetUp.performed += instance.OnGetUp;
+            @GetUp.canceled += instance.OnGetUp;
         }
 
         private void UnregisterCallbacks(IPlayerActionMapActions instance)
@@ -360,6 +386,9 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
             @CheckShoppingList.started -= instance.OnCheckShoppingList;
             @CheckShoppingList.performed -= instance.OnCheckShoppingList;
             @CheckShoppingList.canceled -= instance.OnCheckShoppingList;
+            @GetUp.started -= instance.OnGetUp;
+            @GetUp.performed -= instance.OnGetUp;
+            @GetUp.canceled -= instance.OnGetUp;
         }
 
         public void RemoveCallbacks(IPlayerActionMapActions instance)
@@ -460,6 +489,7 @@ public partial class @PlayerMap: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnCheckShoppingList(InputAction.CallbackContext context);
+        void OnGetUp(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

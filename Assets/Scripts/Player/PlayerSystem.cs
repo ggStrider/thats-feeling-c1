@@ -40,6 +40,12 @@ namespace Player
             objectInvokeComponent._InvokeEvent();
         }
 
+        public void GetUp()
+        {
+            if (_playerSetSettings.currentSitComponent == null) return;
+            _playerSetSettings.currentSitComponent.GetUp();
+        }
+
         public void CheckShoppingList()
         {
             _checkShoppingList.ToggleAnimation();

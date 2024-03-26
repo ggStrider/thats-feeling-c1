@@ -6,8 +6,8 @@ namespace DataModel
     public class CheckItemInInventory : MonoBehaviour
     {
         [Header("You can check item by name or by game object")]
-        [SerializeField] private GameObject _item;
-        [SerializeField] private string _itemName;
+        public GameObject ItemObject;
+        public string ItemName;
         
         [SerializeField] private bool _deleteAfterCheck;
         [SerializeField] private bool _removeFromHand;
@@ -22,24 +22,24 @@ namespace DataModel
 
         public void _Check()
         {
-            if(_item == null && _itemName == string.Empty) return;
+            if(ItemObject == null && ItemName == string.Empty) return;
 
-            if (_item != null)
+            if (ItemObject != null)
             {
-                if(!_session.CheckItem(_item)) return;
+                if(!_session.CheckItem(ItemObject)) return;
                 _onItemExist?.Invoke();
                 
                 if (!_deleteAfterCheck) return;
-                _session.DeleteItem(_item, _removeFromHand);
+                _session.DeleteItem(ItemObject, _removeFromHand);
             }
             
-            else if (_itemName != string.Empty)
+            else if (ItemName != string.Empty)
             {
-                if(!_session.CheckItem(_itemName)) return;
+                if(!_session.CheckItem(ItemName)) return;
                 _onItemExist?.Invoke();
                 
                 if (!_deleteAfterCheck) return;
-                _session.DeleteItem(_itemName, _removeFromHand);
+                _session.DeleteItem(ItemName, _removeFromHand);
             }
         }
     }
