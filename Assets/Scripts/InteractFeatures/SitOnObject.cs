@@ -2,6 +2,7 @@ using UnityEngine;
 
 using Player;
 using UI;
+using UnityEngine.Events;
 
 namespace InteractFeatures
 {
@@ -19,47 +20,55 @@ namespace InteractFeatures
         [SerializeField] private bool _fadeOnChangeState;
         [SerializeField] private Fader _fader;
 
-        [Space, SerializeField] public bool CanSit;
-        [SerializeField] public bool CanGetUp;
+        [Space] [SerializeField] private bool _canSit;
+        [SerializeField] private bool _canGetUp;
+
+        [Space] [SerializeField] private float _fadeSpeed;
+        [SerializeField] private float _unFadeSpeed;
+
+        [SerializeField] private UnityEvent _onGetUp;
         
         [ContextMenu("sit")]
         public async void _Sit()
         {
-            if(!CanSit) return;
-            CanSit = false;
+            if(!_canSit) return;
+            _canSit = false;
 
             var playerSetSettings = FindObjectOfType<PlayerSetSettings>();
             playerSetSettings.currentSitComponent = this;
             
             ChangeState(true);
             if(_fadeOnChangeState)
-                await _fader.Fade();
+                await _fader.Fade(_fadeSpeed);
             
             var place = _sitPlace.position + _sitOffset;
             _player.transform.position = place;
             
             if(_fadeOnChangeState)
-                await _fader.UnFade();
+                await _fader.UnFade(_unFadeSpeed);
         }
 
         [ContextMenu("getup")]
         public async void GetUp()
         {
-            if(!CanGetUp) return;
-            CanGetUp = false;
+            if(!_canGetUp) return;
+            _canGetUp = false;
 
             var playerSetSettings = FindObjectOfType<PlayerSetSettings>();
             playerSetSettings.currentSitComponent = null;
             
-            ChangeState(false);
             if(_fadeOnChangeState)
-                await _fader.Fade();
+                await _fader.Fade(_fadeSpeed);
             
             var place = _getUpPlace.position + _getUpOffset;
             _player.transform.position = place;
             
+            ChangeState(false);
+            
             if(_fadeOnChangeState)
-                await _fader.UnFade();
+                await _fader.UnFade(_unFadeSpeed);
+            
+            _onGetUp?.Invoke();
         }
 
         private void ChangeState(bool isSitState)
@@ -68,6 +77,16 @@ namespace InteractFeatures
             inputReader.RestrictMoving(isSitState);
 
             _player.GetComponent<Rigidbody>().isKinematic = isSitState;
+        }
+
+        public void SetCanSit(bool canSit)
+        {
+            _canSit = canSit;
+        }
+
+        public void SetCanGetUp(bool canGetUp)
+        {
+            _canGetUp = canGetUp;
         }
         
 #if  UNITY_EDITOR

@@ -52,12 +52,12 @@ namespace Events
         [Serializable]
         public class DelayedEvent
         {
-            public UnityEvent action;
-
             // Якщо isTimerConsistent то delay зміниться враховуючи
             // попередній таймер зі списку _delayedEvent
             public float delay;
             public bool isTimersConsistent;
+            
+            public UnityEvent action;
 
             [HideInInspector]
             // Перевірка чи врахувався час попереднього таймеру

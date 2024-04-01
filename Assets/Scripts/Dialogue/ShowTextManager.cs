@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 
 using System.Threading.Tasks;
+using UnityEngine.Events;
 
 namespace Dialogue
 {
@@ -15,9 +16,13 @@ namespace Dialogue
 
         [SerializeField] private List<string> _toShow = new List<string>();
         private bool _processingTask;
+
+        private UnityEvent _onStopShowing;
         
-        public async void _OnShowText(string dialogueText)
+        public async void _OnShowText(string dialogueText, UnityEvent onEnd)
         {
+            _onStopShowing = onEnd;
+            
             _toShow.Add(dialogueText);
             
             if(_processingTask) return;
@@ -62,6 +67,9 @@ namespace Dialogue
             else
             {
                 _processingTask = false;
+                _onStopShowing?.Invoke();
+
+                _onStopShowing?.RemoveAllListeners();
             }
         }
     }

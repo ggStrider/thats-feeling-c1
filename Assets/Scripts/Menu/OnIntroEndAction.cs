@@ -28,7 +28,7 @@ namespace Menu
         private void OnIntroEnded()
         {
             _fader.gameObject.SetActive(true);
-            _fader._OnUnFade();
+            _fader._OnUnFade(0);
 
             var playerController = FindObjectOfType<MenuInputController>();
             playerController._EnableMap();

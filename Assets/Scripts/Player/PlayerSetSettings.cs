@@ -14,6 +14,10 @@ namespace Player
         
         private CinemachinePOV _playerCinemachinePov;
         private CinemachineBrain _playerCinemachineBrain;
+        
+        #if UNITY_EDITOR
+        public CinemachinePOV cmpov => _playerCinemachinePov;
+        #endif
 
         private void Awake()
         {
@@ -30,7 +34,7 @@ namespace Player
             CanInteract = canInteract;
         }
         
-        public void _SetRestrictXPositionCameraAngle(Vector2 minAngles, Vector2 maxAngles, bool wrapped)
+        public void SetRestrictXPositionCameraAngle(Vector2 minAngles, Vector2 maxAngles, bool wrapped)
         {
             _playerCinemachinePov.m_HorizontalAxis.m_MinValue = minAngles.x;
             _playerCinemachinePov.m_VerticalAxis.m_MinValue = minAngles.y;

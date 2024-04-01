@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+    using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InteractFeatures
@@ -12,10 +12,13 @@ namespace InteractFeatures
         [SerializeField] private float _moveDeltaDuration;
         [SerializeField] private bool _isLever;
         
-        [Space] [Header("Delay in milliseconds")] [SerializeField] private int _delayBetweenUsing; 
+        [Space] [Header("Delay in milliseconds")] 
+        [SerializeField] private int _delayBetweenUsing; 
 
         [SerializeField] private bool _onStartPosition = true;
         [SerializeField] private bool _canUse = true;
+
+        private const float Threshold = 0.005f;
         
         private void Awake()
         {
@@ -31,7 +34,7 @@ namespace InteractFeatures
             if (_isLever)
             {
                 _canUse = false;
-                await Move(_onStartPosition);
+                await Move();
 
                 _onStartPosition = !_onStartPosition;
                 DelayUsing();
@@ -39,15 +42,13 @@ namespace InteractFeatures
             else
             {
                 _canUse = false;
-                await Move(true);
+                await Move();
             }
         }
 
-        private async Task Move(bool moveOnPath)
+        private async Task Move()
         {
-            var path = _path;
-            if (!moveOnPath)
-                path = -_path;
+            var path = _onStartPosition ? _path : -_path;
                 
             var newPosition = _objectToMove.localPosition + path;
             var elapsedTime = .0f;
@@ -56,6 +57,14 @@ namespace InteractFeatures
             {
                 _objectToMove.localPosition = Vector3.Lerp(_objectToMove.localPosition, newPosition, elapsedTime / _moveDeltaDuration);
                 elapsedTime += Time.deltaTime;
+
+                if (Vector3.Distance(_objectToMove.localPosition, newPosition) < Threshold)
+                {
+                    elapsedTime = _moveDeltaDuration;
+                }
+
+                Debug.Log(elapsedTime);
+                
                 await Task.Yield();
             }
 

@@ -19,26 +19,28 @@ namespace UI
 
         private async void Start()
         {
-            if (_unFadeOnStart) await UnFade();
+            if (_unFadeOnStart) await UnFade(0);
         }
 
-        public async void _OnFade()
+        public async void _OnFade(float fadeSpeed)
         {
-            await Fade();
+            await Fade(fadeSpeed);
         }
         
-        public async void _OnUnFade()
+        public async void _OnUnFade(float unFadeSpeed)
         {
-            await UnFade();
+            await UnFade(unFadeSpeed);
         }
         
-        public async Task UnFade()
+        public async Task UnFade(float unFadeSpeed)
         {
             var newColor = _blackScreen.color;
+
+            var speed = unFadeSpeed > 0 ? unFadeSpeed : _unFadeSpeed;
             while (_blackScreen.color.a > 0)
             {
                 if (_blackScreen == null) return;
-                newColor.a = Mathf.Clamp01(newColor.a - _unFadeSpeed);
+                newColor.a = Mathf.Clamp01(newColor.a - speed);
                 _blackScreen.color = newColor;
 
                 await Task.Yield();
@@ -47,12 +49,14 @@ namespace UI
             _unFaded?.Invoke();
         }
         
-        public async Task Fade()
+        public async Task Fade(float fadeSpeed)
         {
             var newColor = _blackScreen.color;
+            
+            var speed = fadeSpeed > 0 ? fadeSpeed : _unFadeSpeed;
             while (_blackScreen.color.a < 1)
             {
-                newColor.a = Mathf.Clamp01(newColor.a + _fadeSpeed);
+                newColor.a = Mathf.Clamp01(newColor.a + speed);
                 _blackScreen.color = newColor;
 
                 await Task.Yield();

@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Dialogue
 {
     public class SendTextDataToManager : MonoBehaviour
     {
-        [SerializeField] private string _text;
+        [SerializeField, TextArea(0, 5)] private string[] _texts;
+        [SerializeField] private UnityEvent _onTextShowed;
+        
         private ShowTextManager _showTextManager;
 
         private void Awake()
@@ -12,18 +15,12 @@ namespace Dialogue
             _showTextManager = FindObjectOfType<ShowTextManager>();
         }
 
-        [ContextMenu("unit 1")]
         public void _OnSendData()
         {
-            _showTextManager._OnShowText(_text);
-        }
-
-        [ContextMenu("unit 2")]
-        public void unit2()
-        {
-            _showTextManager._OnShowText("дарова");
-            _showTextManager._OnShowText("шо ти");
-            _showTextManager._OnShowText("легенда");
+            foreach (var text in _texts)
+            {
+                _showTextManager._OnShowText(text, _onTextShowed);
+            }
         }
     }
 }
