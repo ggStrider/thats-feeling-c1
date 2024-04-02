@@ -19,6 +19,8 @@ namespace InteractFeatures
         [SerializeField] private bool _canUse = true;
 
         private const float Threshold = 0.005f;
+
+        public bool IsOnStartPosition => _onStartPosition;
         
         private void Awake()
         {
@@ -27,8 +29,20 @@ namespace InteractFeatures
         }
 
         [ContextMenu("move")]
-        public async void _Move()
+        public async void _Move(bool forced)
         {
+            if (forced)
+            {
+                _canUse = false;
+                _onStartPosition = !_onStartPosition;
+
+                await Move();
+                if (_isLever)
+                {
+                    DelayUsing();
+                }
+                
+            }
             if(!_canUse) return;
             
             if (_isLever)
@@ -63,7 +77,7 @@ namespace InteractFeatures
                     elapsedTime = _moveDeltaDuration;
                 }
 
-                Debug.Log(elapsedTime);
+                Debug.Log(elapsedTime); 
                 
                 await Task.Yield();
             }

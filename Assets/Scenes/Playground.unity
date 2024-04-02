@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cadabfd0a0c04f499720da8354a6ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initializeTaskOnStart: 0
+  _initializeTasksOnStart: 0
   _tasks:
   - TaskText: buy zhivchik
     TextComponent: {fileID: 1711620014}
@@ -269,6 +269,7 @@ MonoBehaviour:
         m_Calls: []
     <ShortDescription>k__BackingField: id1
     Completed: 0
+    UseAppearAnimation: 1
   - TaskText: bomb belgorod
     TextComponent: {fileID: 934241608}
     OnTaskCompleted:
@@ -276,8 +277,14 @@ MonoBehaviour:
         m_Calls: []
     <ShortDescription>k__BackingField: id2
     Completed: 0
-  _playSound: {fileID: 735387468}
+    UseAppearAnimation: 1
+  _playSoundOnCompleted: {fileID: 0}
   _canCompleteTask: 1
+  _initialized: 0
+  _alphaDeltaSpeed: 0.01
+  _onAllTasksComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &253556252
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,17 +787,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!114 &735387468 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 735387468, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
-  m_PrefabInstance: {fileID: 794864114}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db62c8e542b64f05ae22f32c0a65a3ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &737158220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1199,7 +1195,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c225767caa0e89847bbfb05ae0a85f6a, type: 2}
   m_sharedMaterial: {fileID: -6681810909633180745, guid: c225767caa0e89847bbfb05ae0a85f6a, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -6681810909633180745, guid: c225767caa0e89847bbfb05ae0a85f6a, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1342,6 +1339,8 @@ MonoBehaviour:
   _isLever: 1
   _canUse: 1
   _onRotatedPosition: 0
+  _onRotated: {fileID: 0}
+  _onBackToStartPosition: {fileID: 0}
 --- !u!65 &956290456
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2428,9 +2427,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d2a359166c16541922761f4b8c6d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _place: {fileID: 1379928907}
-  _objectToTake: {fileID: 0}
   _takeToHand: 1
+  _objectToTake: {fileID: 0}
+  _place: {fileID: 1379928907}
   _size: {x: 0.3, y: 0.3, z: 0.3}
   _putOffset: {x: 0, y: 0, z: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
@@ -2857,7 +2856,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c225767caa0e89847bbfb05ae0a85f6a, type: 2}
   m_sharedMaterial: {fileID: -6681810909633180745, guid: c225767caa0e89847bbfb05ae0a85f6a, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -6681810909633180745, guid: c225767caa0e89847bbfb05ae0a85f6a, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3150,7 +3150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ee47dd39c6a01d4438e73bd1a9c56e0a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96d7a8581f0ecbb4f81596c305ac8d92, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

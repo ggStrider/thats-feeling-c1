@@ -6,18 +6,18 @@ namespace InteractFeatures
 {
     public class TakeItem : MonoBehaviour
     {
-        [SerializeField] private Transform _place;
-
+        [SerializeField] private bool _takeToHand;
+        
         [Space, Tooltip("leaving it null = this game object")]
         [SerializeField] private GameObject _objectToTake;
-        [SerializeField] private bool _takeToHand;
+        [SerializeField] private Transform _place;
         
         [Space]
         [SerializeField] private Vector3 _size;
         [SerializeField] private Vector3 _putOffset;
         [SerializeField] private Vector3 _rotationOffset;
 
-        public bool _canTake = true ;
+        public bool _canTake = true;
         
         [SerializeField] private UnityEvent _onTake;
 
@@ -36,6 +36,7 @@ namespace InteractFeatures
         {
             if(!_canTake) return;
             _session.AddItem(_objectToTake, _takeToHand);
+            _onTake?.Invoke();
 
             if (!_takeToHand)
             {
@@ -47,9 +48,13 @@ namespace InteractFeatures
             _objectToTake.transform.parent = _place;
             
             _objectToTake.transform.SetLocalPositionAndRotation(_putOffset, Quaternion.Euler(_rotationOffset));
-            _onTake?.Invoke();
             
             enabled = false;
+        }
+
+        public void _SetCanTake(bool canTake)
+        {
+            _canTake = canTake;
         }
     }
 }

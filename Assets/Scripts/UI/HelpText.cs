@@ -11,6 +11,7 @@ namespace UI
 
         [Space] [SerializeField] private float _showDelta = 0.001f;
 
+        [SerializeField] private bool _showOnce;
         public bool StillHasShow;
 
         public async void _ShowHelpText()
@@ -42,8 +43,18 @@ namespace UI
             newColor.a = 0;
             _helpTextComponent.color = newColor;
 
-            if (!StillHasShow) return;
+            if (!StillHasShow || _showOnce) return;
             _ShowHelpText();
+        }
+
+        public void _SetShowOnce(bool showOnce)
+        {
+            _showOnce = showOnce;
+        }
+
+        public void _SetHelpText(string text)
+        {
+            _helpTextComponent.text = _helpText;
         }
 
         public void _StopShowing()

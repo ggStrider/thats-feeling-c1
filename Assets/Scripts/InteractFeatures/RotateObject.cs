@@ -23,6 +23,8 @@ namespace InteractFeatures
         [Space] [SerializeField] private InvokeUnityEvent _onRotated;
         [SerializeField] private InvokeUnityEvent _onBackToStartPosition;
 
+        public bool Rotated => _onRotatedPosition;
+
         private void Awake()
         {
             if (_objectToRotate != null) return;

@@ -29,8 +29,8 @@ namespace DataModel
         public void AddItem(GameObject item, bool takeToHands)
         {
             _data.InventoryItems.Add(item);
-            
-            if(!takeToHands) return;
+
+            if (!takeToHands) return;
             _data.ObjectInHand = item;
         }
 
@@ -38,21 +38,21 @@ namespace DataModel
         {
             return _data.InventoryItems.Contains(item);
         }
-        
+
         public bool CheckItem(string itemName)
         {
             return _data.InventoryItems.FirstOrDefault(item => item.name == itemName);
         }
 
         public void DeleteItem(string itemName, bool removeFromHands)
-        { 
+        {
             var itemToRemove = _data.InventoryItems.Find(item => item.name == itemName);
 
-            if(itemToRemove == null) return;
+            if (itemToRemove == null) return;
             _data.InventoryItems.Remove(itemToRemove);
-            
-            if(!removeFromHands) return;
-            if(_data.ObjectInHand == null) return;
+
+            if (!removeFromHands) return;
+            if (_data.ObjectInHand == null) return;
 
             var go = _data.ObjectInHand;
             Destroy(go);
@@ -62,12 +62,17 @@ namespace DataModel
         {
             if (!_data.InventoryItems.Contains(item)) return;
             _data.InventoryItems.Remove(item);
-            
-            if(!removeFromHands) return;
-            if(_data.ObjectInHand == null) return;
+
+            if (!removeFromHands) return;
+            if (_data.ObjectInHand == null) return;
 
             var go = _data.ObjectInHand;
             Destroy(go);
+        }
+
+        public void DeleteAllItems()
+        {
+            _data.InventoryItems.Clear();
         }
 
         public GameObject GetObjectInHand()
