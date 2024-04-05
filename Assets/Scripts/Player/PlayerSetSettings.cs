@@ -34,13 +34,19 @@ namespace Player
             CanInteract = canInteract;
         }
         
-        public void SetRestrictXPositionCameraAngle(Vector2 minAngles, Vector2 maxAngles, bool wrapped)
+        /// <summary>
+        /// Restrict angle for camera method
+        /// </summary>
+        /// <param name="minAndMaxHorizontalAngles">x = horizontal min value; y = horizontal max value</param>
+        /// <param name="minAndMaxVerticalAngles">x = vertical min value; y = vertical max value</param>
+        /// <param name="wrapped">is wrapped</param>
+        public void SetRestrictXPositionCameraAngle(Vector2 minAndMaxHorizontalAngles, Vector2 minAndMaxVerticalAngles, bool wrapped)
         {
-            _playerCinemachinePov.m_HorizontalAxis.m_MinValue = minAngles.x;
-            _playerCinemachinePov.m_VerticalAxis.m_MinValue = minAngles.y;
+            _playerCinemachinePov.m_HorizontalAxis.m_MinValue = minAndMaxHorizontalAngles.x;
+            _playerCinemachinePov.m_HorizontalAxis.m_MaxValue = minAndMaxHorizontalAngles.y;
             
-            _playerCinemachinePov.m_HorizontalAxis.m_MaxValue = maxAngles.x;
-            _playerCinemachinePov.m_VerticalAxis.m_MaxValue = maxAngles.y;
+            _playerCinemachinePov.m_VerticalAxis.m_MinValue = minAndMaxVerticalAngles.x;
+            _playerCinemachinePov.m_VerticalAxis.m_MaxValue = minAndMaxVerticalAngles.y;
 
             _playerCinemachinePov.m_HorizontalAxis.m_Wrap = wrapped;
         }

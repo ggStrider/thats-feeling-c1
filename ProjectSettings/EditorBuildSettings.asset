@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Apartament.unity
     guid: 44d9415685676784e9579987075d9b38
+  - enabled: 1
+    path: Assets/Scenes/Field.unity
+    guid: f80835a6fbda62343b1ef21544185939
+  - enabled: 1
+    path: Assets/Scenes/Town.unity
+    guid: 929323e6e288bbf4eb40f8c8b8f06c3b
   m_configObjects: {}

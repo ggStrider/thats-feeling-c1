@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,12 +16,17 @@ namespace Sounds
 
         [SerializeField] private bool _randomPitch;
         [SerializeField, Range(-3, 3)] private float _minPitch; 
-        [SerializeField, Range(-3, 3)] private float _maxPitch; 
+        [SerializeField, Range(-3, 3)] private float _maxPitch;
+
+        [Space] [SerializeField] private bool _excludeRepeating;
+        private List<AudioClip> _availableClips;
         
         [Space] [SerializeField] private UnityEvent _onComplete;
 
         private void Awake()
         {
+            _availableClips = _clips.ToList();
+                
             if(_source != null) return;
             _source = GetComponent<AudioSource>();
         }
@@ -33,7 +40,16 @@ namespace Sounds
             }
             
             var clipNumber = GenerateRandomValue.GenerateRandomInt(0, _clips.Length);
+            if (_excludeRepeating)
+            {
+                _source.clip = _availableClips[GenerateRandomValue.GenerateRandomInt(0, _availableClips.Count)];
+                _source.Play();
+                WaitAndInvoke(clipNumber);
+                
+                return;
+            }
             _source.clip = _clips[clipNumber];
+            
             _source.Play();
 
             WaitAndInvoke(clipNumber);

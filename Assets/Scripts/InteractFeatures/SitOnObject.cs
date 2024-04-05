@@ -56,9 +56,11 @@ namespace InteractFeatures
 
             var playerSetSettings = FindObjectOfType<PlayerSetSettings>();
             playerSetSettings.currentSitComponent = null;
-            
+
             if(_fadeOnChangeState)
                 await _fader.Fade(_fadeSpeed);
+
+            _onGetUp?.Invoke();
             
             var place = _getUpPlace.position + _getUpOffset;
             _player.transform.position = place;
@@ -67,8 +69,6 @@ namespace InteractFeatures
             
             if(_fadeOnChangeState)
                 await _fader.UnFade(_unFadeSpeed);
-            
-            _onGetUp?.Invoke();
         }
 
         private void ChangeState(bool isSitState)

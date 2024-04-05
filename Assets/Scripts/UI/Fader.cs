@@ -40,6 +40,7 @@ namespace UI
             while (_blackScreen.color.a > 0)
             {
                 if (_blackScreen == null) return;
+                
                 newColor.a = Mathf.Clamp01(newColor.a - speed);
                 _blackScreen.color = newColor;
 
@@ -53,9 +54,11 @@ namespace UI
         {
             var newColor = _blackScreen.color;
             
-            var speed = fadeSpeed > 0 ? fadeSpeed : _unFadeSpeed;
+            var speed = fadeSpeed > 0 ? fadeSpeed : _fadeSpeed;
             while (_blackScreen.color.a < 1)
             {
+                if (_blackScreen == null) return;
+
                 newColor.a = Mathf.Clamp01(newColor.a + speed);
                 _blackScreen.color = newColor;
 

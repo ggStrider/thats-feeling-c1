@@ -29,7 +29,7 @@ namespace Events
             }
         }
 
-        public void ChangeBoolCanInvoke(bool canInvoke)
+        public void _ChangeBoolCanInvoke(bool canInvoke)
         {
             _canInvoke = canInvoke;
         }
