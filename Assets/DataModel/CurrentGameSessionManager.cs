@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DataModel
@@ -5,6 +6,8 @@ namespace DataModel
     [RequireComponent(typeof(GameSession))]
     public class CurrentGameSessionManager : MonoBehaviour
     {
+        private List<string> _itemNames;
+        
         private GameSession _gameSession;
 
         private void Start()
@@ -14,12 +17,17 @@ namespace DataModel
 
         public void _DeleteItem(string itemName)
         {
-            _gameSession.DeleteItem(itemName, true);
+            _gameSession.DeleteItem(_itemNames.ToArray(), true);
         }
 
         public void _DeleteAllItems()
         {
             _gameSession.DeleteAllItems();
+        }
+
+        public void _GetArrayItems(List<string> itemArray)
+        {
+            _itemNames = itemArray;
         }
     }
 }

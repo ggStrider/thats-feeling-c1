@@ -537,6 +537,7 @@ MonoBehaviour:
   _canInvoke: 1
   _canInvokeOnce: 0
   _invokeOnStart: 0
+  _deactivateObjectAfterEvent: 0
 --- !u!1 &105727861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1304,7 @@ MonoBehaviour:
   _canInvoke: 1
   _canInvokeOnce: 0
   _invokeOnStart: 0
+  _deactivateObjectAfterEvent: 0
 --- !u!1 &321895795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3902,6 +3904,7 @@ MonoBehaviour:
   _canInvoke: 1
   _canInvokeOnce: 0
   _invokeOnStart: 0
+  _deactivateObjectAfterEvent: 0
 --- !u!1001 &1310227970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4574,6 +4577,7 @@ MonoBehaviour:
   _randomPitch: 0
   _minPitch: 0
   _maxPitch: 0
+  _excludeRepeating: 0
   _onComplete:
     m_PersistentCalls:
       m_Calls: []
@@ -4871,7 +4875,7 @@ MonoBehaviour:
       - m_Target: {fileID: 812964350}
         m_TargetAssemblyTypeName: UI.Fader, Assembly-CSharp
         m_MethodName: _OnFade
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4919,6 +4923,7 @@ MonoBehaviour:
   _canInvoke: 1
   _canInvokeOnce: 0
   _invokeOnStart: 0
+  _deactivateObjectAfterEvent: 0
 --- !u!82 &1708103647
 AudioSource:
   m_ObjectHideFlags: 0

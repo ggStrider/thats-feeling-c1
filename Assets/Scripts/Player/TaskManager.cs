@@ -7,7 +7,6 @@ using Sounds;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -40,6 +39,7 @@ namespace Player
             foreach (var task in _tasks)
             {
                 task.TextComponent.text = task.TaskText;
+                task.TextComponent.gameObject.SetActive(true);
                 if (task.UseAppearAnimation)
                 {
                     AddAlphaToText(task.TextComponent);

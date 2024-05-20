@@ -40,7 +40,7 @@ namespace InteractFeatures
 
             if (!_takeToHand)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
                 return;
             }
             

@@ -11,11 +11,12 @@ namespace Events
         [SerializeField] private bool _canInvokeOnce;
 
         [Space] [SerializeField] private bool _invokeOnStart;
+        [SerializeField] private bool _deactivateObjectAfterEvent;
 
         private void Start()
         {
-            if(_invokeOnStart)
-                _InvokeEvent();
+            if(!_invokeOnStart) return;
+            _InvokeEvent();
         }
 
         public void _InvokeEvent()
@@ -23,10 +24,14 @@ namespace Events
             if (!_canInvoke) return;
 
             unityEvent?.Invoke();
+            
             if(_canInvokeOnce) 
             {
                 _canInvoke = false; 
             }
+
+            if (!_deactivateObjectAfterEvent) return;
+            gameObject.SetActive(false);
         }
 
         public void _ChangeBoolCanInvoke(bool canInvoke)

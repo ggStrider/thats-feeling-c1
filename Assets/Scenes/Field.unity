@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 65e19fcf1519e92468a400059e1f53d4, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 5c8b62d1ad97ad443b54738f45d6ad66, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -5265,6 +5265,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2152230272693826692, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_VerticalAxis.m_MaxSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152230272693826692, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_VerticalAxis.m_AccelTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152230272693826692, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_VerticalAxis.m_DecelTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152230272693826692, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_HorizontalAxis.m_MaxSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152230272693826692, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_HorizontalAxis.m_AccelTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152230272693826692, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_HorizontalAxis.m_DecelTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152230273171210643, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_StandbyUpdate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2152230273291980236, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -5320,6 +5348,10 @@ PrefabInstance:
     - target: {fileID: 2152230273473556317, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2152230273592148752, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+      propertyPath: m_UpdateMethod
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2152230273592148753, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
       propertyPath: m_LocalPosition.x

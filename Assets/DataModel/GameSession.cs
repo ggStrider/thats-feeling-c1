@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -23,6 +24,7 @@ namespace DataModel
         private bool IsSessionsExist()
         {
             var sessions = FindObjectsOfType<GameSession>();
+
             return sessions.Any(oneSession => oneSession != this);
         }
 
@@ -34,40 +36,88 @@ namespace DataModel
             _data.ObjectInHand = item;
         }
 
-        public bool CheckItem(GameObject item)
+        public bool CheckItems(GameObject[] items)
         {
-            return _data.InventoryItems.Contains(item);
+            if (_data.InventoryItems.Count == 0) return false;
+
+            foreach (var item in items)
+            {
+                if (!_data.InventoryItems.Contains(item))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        public bool CheckItem(string itemName)
+        public bool CheckItems(string[] itemsName)
         {
-            return _data.InventoryItems.FirstOrDefault(item => item.name == itemName);
+            if (_data.InventoryItems.Count == 0) return false;
+            
+            foreach (var itemObject in _data.InventoryItems)
+            {
+                foreach (var itemName in itemsName)
+                {
+                    if (itemObject.name == itemName) return true;
+                }
+            }
+
+            return false;
         }
 
-        public void DeleteItem(string itemName, bool removeFromHands)
+        public void DeleteItem(string[] itemNames, bool removeFromHands)
         {
-            var itemToRemove = _data.InventoryItems.Find(item => item.name == itemName);
+            var itemsToRemove = _data.InventoryItems.FindAll(item => itemNames.Contains(item.name));
 
-            if (itemToRemove == null) return;
-            _data.InventoryItems.Remove(itemToRemove);
+            if (itemsToRemove.Count == 0) return;
+
+            foreach (var item in itemsToRemove)
+            {
+                _data.InventoryItems.Remove(item);
+            }
 
             if (!removeFromHands) return;
             if (_data.ObjectInHand == null) return;
 
-            var go = _data.ObjectInHand;
-            Destroy(go);
+            var containsObject = false;
+
+            foreach (var item in itemsToRemove)
+            {
+                if (item != _data.ObjectInHand) continue;
+                
+                containsObject = true;
+                break;
+            }
+
+            if (!containsObject) return;
+
+            var objectInHand = _data.ObjectInHand;
+            Destroy(objectInHand);
         }
 
-        public void DeleteItem(GameObject item, bool removeFromHands)
+        public void DeleteItem(GameObject[] items, bool removeFromHands)
         {
-            if (!_data.InventoryItems.Contains(item)) return;
-            _data.InventoryItems.Remove(item);
+            var itemsToDelete = new List<GameObject>();
+            foreach (var item in items)
+            {
+                if (!_data.InventoryItems.Contains(item)) continue;
+                itemsToDelete.Add(item);
+            }
+
+            foreach (var item in itemsToDelete)
+            {
+                _data.InventoryItems.Remove(item);
+            }
 
             if (!removeFromHands) return;
             if (_data.ObjectInHand == null) return;
 
-            var go = _data.ObjectInHand;
-            Destroy(go);
+            foreach (var item in itemsToDelete)
+            {
+                if(item == _data.ObjectInHand)
+                    Destroy(item);
+            }
         }
 
         public void DeleteAllItems()

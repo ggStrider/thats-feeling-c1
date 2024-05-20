@@ -1,5 +1,7 @@
 using UnityEngine;
+
 using Events;
+using InteractFeatures.Hovered;
 
 namespace Player
 {
@@ -16,10 +18,18 @@ namespace Player
         [SerializeField] private CheckShoppingList _checkShoppingList;
 
         private PlayerSetSettings _playerSetSettings;
-        private Rigidbody _rigidbody;
+        [SerializeField] private Rigidbody _rigidbody;
 
         private Vector2 _direction;
-        
+        private IHovered _lastHoveredObject;
+
+        private void Start()
+        {
+            _checkInRay = GetComponent<CheckObjectsInRay>();
+            _rigidbody = GetComponent<Rigidbody>();
+            _playerSetSettings = GetComponent<PlayerSetSettings>();
+        }
+
         public void SetDirection(Vector2 direction)
         {
             _direction = direction;
@@ -69,15 +79,32 @@ namespace Player
                 Color.green);
 #endif
         }
-        
-#if UNITY_EDITOR
-        private void OnValidate()
+
+        private void Update()
         {
-            _rigidbody = GetComponent<Rigidbody>();
-            _playerSetSettings = GetComponent<PlayerSetSettings>();
-            _checkInRay = GetComponent<CheckObjectsInRay>();
-            _checkShoppingList = GetComponent<CheckShoppingList>();
+            if (!Physics.Raycast(VisionCamera.transform.position, VisionCamera.transform.forward, out var hit,
+                    _rayCheckDistance))
+            {
+                if (_lastHoveredObject == null) return;
+                NonHoveredOnLastObject();
+                return;
+            }
+
+            if (!hit.transform.gameObject.CompareTag("RayHovered"))
+            {
+                if (_lastHoveredObject == null) return;
+                NonHoveredOnLastObject();
+                return;
+            }
+            
+            _lastHoveredObject = hit.transform.gameObject.GetComponent<IHovered>();
+            _lastHoveredObject.OnHovered();
         }
-#endif
+
+        private void NonHoveredOnLastObject()
+        {
+            _lastHoveredObject.NonHovered();
+            _lastHoveredObject = null;
+        }
     }
 }

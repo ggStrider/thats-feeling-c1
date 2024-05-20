@@ -25,15 +25,15 @@ namespace Player
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        private void OnDestroy()
-        {
-            KeysUnSubscribe();
-        }
-
-        private void OnDisable()
-        {
-            KeysUnSubscribe();
-        }
+        // private void OnDestroy()
+        // {
+        //     KeysUnSubscribe();
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     KeysUnSubscribe();
+        // }
 
         private void KeysUnSubscribe()
         {
