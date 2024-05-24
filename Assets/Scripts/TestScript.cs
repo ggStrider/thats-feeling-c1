@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class TestScript : MonoBehaviour
+public static class TestScript
 {
-    
+    public static void Warn(string text)
+    {
+        Debug.LogWarning(text);
+    }
 }

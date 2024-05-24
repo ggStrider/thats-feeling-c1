@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
+using Items;
+
 using System.Linq;
 
 namespace DataModel
@@ -28,102 +29,74 @@ namespace DataModel
             return sessions.Any(oneSession => oneSession != this);
         }
 
-        public void AddItem(GameObject item, bool takeToHands)
+        #region Refactored
+        public void AddItem(ItemInfo itemInfo)
         {
-            _data.InventoryItems.Add(item);
-
-            if (!takeToHands) return;
-            _data.ObjectInHand = item;
+            _data.Items.Add(itemInfo);
         }
 
-        public bool CheckItems(GameObject[] items)
+        public void TakeToHands(ItemInfo objectToTake)
         {
-            if (_data.InventoryItems.Count == 0) return false;
+            if (objectToTake == null)
+            {
+                Debug.LogWarning($"Object to take is null. It's here {this}");
+            }
 
+            if (_data.ObjectInHand != null)
+            {
+                Debug.LogWarning($"Already have object in hand!");
+            }
+            _data.ObjectInHand = objectToTake.ItemWhenTakeInHand;
+        }
+
+        public bool IsInventoryContainsParameterItems(ItemInfo[] items)
+        {
             foreach (var item in items)
             {
-                if (!_data.InventoryItems.Contains(item))
-                {
-                    return false;
-                }
+                if (!_data.Items.Contains(item)) return false;
             }
 
             return true;
         }
 
-        public bool CheckItems(string[] itemsName)
+        public void DeleteItem(ItemInfo item)
         {
-            if (_data.InventoryItems.Count == 0) return false;
-            
-            foreach (var itemObject in _data.InventoryItems)
+            if (!_data.Items.Contains(item))
             {
-                foreach (var itemName in itemsName)
-                {
-                    if (itemObject.name == itemName) return true;
-                }
+                Debug.LogWarning($"Inventory doesn't contain {item}");
+                return;
             }
 
-            return false;
+            _data.Items.Remove(item);
+
+            if (_data.ObjectInHand != item.ItemWhenTakeInHand) return;
+
+            RemoveItemFromHands(item);
         }
 
-        public void DeleteItem(string[] itemNames, bool removeFromHands)
+        public bool CheckIsParameterItemInHands(ItemInfo item)
         {
-            var itemsToRemove = _data.InventoryItems.FindAll(item => itemNames.Contains(item.name));
+            return _data.ObjectInHand == item.ItemWhenTakeInHand;
+        }
 
-            if (itemsToRemove.Count == 0) return;
-
-            foreach (var item in itemsToRemove)
+        public void RemoveItemFromHands(ItemInfo item)
+        {
+            if (!CheckIsParameterItemInHands(item))
             {
-                _data.InventoryItems.Remove(item);
+                Debug.LogWarning($"Item {item.ItemWhenTakeInHand} not in hand! Item: {item}");
+                return;
             }
-
-            if (!removeFromHands) return;
-            if (_data.ObjectInHand == null) return;
-
-            var containsObject = false;
-
-            foreach (var item in itemsToRemove)
-            {
-                if (item != _data.ObjectInHand) continue;
-                
-                containsObject = true;
-                break;
-            }
-
-            if (!containsObject) return;
-
+            
             var objectInHand = _data.ObjectInHand;
+            _data.ObjectInHand = null;
             Destroy(objectInHand);
         }
-
-        public void DeleteItem(GameObject[] items, bool removeFromHands)
-        {
-            var itemsToDelete = new List<GameObject>();
-            foreach (var item in items)
-            {
-                if (!_data.InventoryItems.Contains(item)) continue;
-                itemsToDelete.Add(item);
-            }
-
-            foreach (var item in itemsToDelete)
-            {
-                _data.InventoryItems.Remove(item);
-            }
-
-            if (!removeFromHands) return;
-            if (_data.ObjectInHand == null) return;
-
-            foreach (var item in itemsToDelete)
-            {
-                if(item == _data.ObjectInHand)
-                    Destroy(item);
-            }
-        }
-
+        
         public void DeleteAllItems()
         {
-            _data.InventoryItems.Clear();
+            _data.Items.Clear();
         }
+        #endregion
 
         public GameObject GetObjectInHand()
         {

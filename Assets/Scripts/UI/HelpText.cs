@@ -1,6 +1,7 @@
-using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
+using TMPro;
+
+using System.Threading.Tasks;
 
 namespace UI
 {

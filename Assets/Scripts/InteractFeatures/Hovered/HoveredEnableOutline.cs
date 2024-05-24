@@ -4,7 +4,7 @@ namespace InteractFeatures.Hovered
 {
     public class HoveredEnableOutline : MonoBehaviour, IHovered
     {
-        [Tooltip("Leave it alone == this object")]
+        [Tooltip("Leave it null == this object")]
         [SerializeField] private Outline _objectToOutline;
 
         private void Start()

@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 208980649080124320, guid: 9190d01e5f04eca42acec18241799708, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 208980649080124320, guid: 9190d01e5f04eca42acec18241799708, type: 3}
       propertyPath: m_LocalScale.x
@@ -1991,7 +1991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8993249404165852273, guid: c6cc7952bcefc69418d64cff41da02cb, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8993249404165852273, guid: c6cc7952bcefc69418d64cff41da02cb, type: 3}
       propertyPath: m_LocalScale.x
@@ -3761,6 +3761,7 @@ GameObject:
   - component: {fileID: 752244118}
   - component: {fileID: 752244117}
   - component: {fileID: 752244116}
+  - component: {fileID: 752244120}
   m_Layer: 0
   m_Name: Buy
   m_TagString: Untagged
@@ -3795,13 +3796,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250fd301919a4dc787257c25519abc92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemObject: {fileID: 0}
-  ItemName: 
-  _deleteAfterCheck: 0
+  ItemsObject: []
+  ItemsName:
+  - shampoon1
+  - shampoon2
+  _deleteAfterCheck: 1
   _removeFromHand: 0
   _onItemExist:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2067701168}
+        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+        m_MethodName: set_name
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 3313
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &752244117
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3865,6 +3880,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752244114}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &752244120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752244114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8d9cdbf44d03942b46ae5edb671929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752244116}
+        m_TargetAssemblyTypeName: DataModel.CheckItemInInventory, Assembly-CSharp
+        m_MethodName: _Check
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _canInvoke: 1
+  _canInvokeOnce: 0
+  _invokeOnStart: 0
+  _deactivateObjectAfterEvent: 0
 --- !u!1 &754231589
 GameObject:
   m_ObjectHideFlags: 0
@@ -4221,7 +4267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25413bfc56746beb0162dadb9c97c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectToOutline: {fileID: 0}
+  _objectToOutline: {fileID: 796521372}
 --- !u!114 &796521372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4240,6 +4286,115 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &796521377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796521366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d2a359166c16541922761f4b8c6d50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _takeToHand: 0
+  _objectToTake: {fileID: 0}
+  _place: {fileID: 0}
+  _size: {x: 0, y: 0, z: 0}
+  _putOffset: {x: 0, y: 0, z: 0}
+  _rotationOffset: {x: 0, y: 0, z: 0}
+  _canTake: 1
+  _onTake:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &796521378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796521366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250fd301919a4dc787257c25519abc92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemsObject: []
+  ItemsName:
+  - Basket
+  _deleteAfterCheck: 0
+  _removeFromHand: 0
+  _onItemExist:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 796521377}
+        m_TargetAssemblyTypeName: InteractFeatures.TakeItem, Assembly-CSharp
+        m_MethodName: _Take
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2011610435}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 796521366}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &796521379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796521366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8d9cdbf44d03942b46ae5edb671929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 796521378}
+        m_TargetAssemblyTypeName: DataModel.CheckItemInInventory, Assembly-CSharp
+        m_MethodName: _Check
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _canInvoke: 1
+  _canInvokeOnce: 0
+  _invokeOnStart: 0
+  _deactivateObjectAfterEvent: 0
 --- !u!43 &797898433
 Mesh:
   m_ObjectHideFlags: 0
@@ -4547,7 +4702,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _canInvoke: 1
-  _canInvokeOnce: 0
+  _canInvokeOnce: 1
   _invokeOnStart: 0
   _deactivateObjectAfterEvent: 0
 --- !u!65 &832202622
@@ -4563,6 +4718,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.021781674, y: 0.022596406, z: 0.00887836}
   m_Center: {x: -0.00007242802, y: -5.5468747e-17, z: 0.0039032688}
+--- !u!114 &832202626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832202611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d25413bfc56746beb0162dadb9c97c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectToOutline: {fileID: 832202627}
+--- !u!114 &832202627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832202611}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!43 &849180537
 Mesh:
   m_ObjectHideFlags: 0
@@ -5211,7 +5397,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4762117272998709951, guid: 3dba1746bb39b554781e57cf407c3112, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4762117272998709951, guid: 3dba1746bb39b554781e57cf407c3112, type: 3}
       propertyPath: m_LocalScale.x
@@ -7497,104 +7683,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.004716903, y: 0.0054562828, z: 0.015239471}
   m_Center: {x: 0, y: 5.6220164e-17, z: 0.007912283}
---- !u!114 &1464229304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464229299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f8d9cdbf44d03942b46ae5edb671929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1464229308}
-        m_TargetAssemblyTypeName: DataModel.CheckItemInInventory, Assembly-CSharp
-        m_MethodName: _Check
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: shampoo1
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1464229314}
-        m_TargetAssemblyTypeName: InteractFeatures.TakeItem, Assembly-CSharp
-        m_MethodName: _Take
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _canInvoke: 1
-  _canInvokeOnce: 0
-  _invokeOnStart: 0
-  _deactivateObjectAfterEvent: 0
---- !u!114 &1464229308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464229299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 250fd301919a4dc787257c25519abc92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemObject: {fileID: 0}
-  ItemName: Basket
-  _deleteAfterCheck: 0
-  _removeFromHand: 0
-  _onItemExist:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 325219748}
-        m_TargetAssemblyTypeName: Player.TaskManager, Assembly-CSharp
-        m_MethodName: _CompleteTaskByShortDescription
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: shampoo1
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1464229299}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1009611171}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1464229312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7613,7 +7701,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &1464229313
+--- !u!114 &1464229318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7625,8 +7713,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25413bfc56746beb0162dadb9c97c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectToOutline: {fileID: 0}
---- !u!114 &1464229314
+  _objectToOutline: {fileID: 1464229312}
+--- !u!114 &1464229320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464229299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f8d9cdbf44d03942b46ae5edb671929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1464229322}
+        m_TargetAssemblyTypeName: DataModel.CheckItemInInventory, Assembly-CSharp
+        m_MethodName: _Check
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _canInvoke: 1
+  _canInvokeOnce: 0
+  _invokeOnStart: 0
+  _deactivateObjectAfterEvent: 0
+--- !u!114 &1464229321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7639,7 +7758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _takeToHand: 0
-  _objectToTake: {fileID: 1464229299}
+  _objectToTake: {fileID: 0}
   _place: {fileID: 0}
   _size: {x: 0, y: 0, z: 0}
   _putOffset: {x: 0, y: 0, z: 0}
@@ -7648,6 +7767,50 @@ MonoBehaviour:
   _onTake:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1464229322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464229299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250fd301919a4dc787257c25519abc92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemsObject: []
+  ItemsName:
+  - Basket
+  _deleteAfterCheck: 0
+  _removeFromHand: 0
+  _onItemExist:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1464229321}
+        m_TargetAssemblyTypeName: InteractFeatures.TakeItem, Assembly-CSharp
+        m_MethodName: _Take
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: penis
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1009611171}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!43 &1524195194
 Mesh:
   m_ObjectHideFlags: 0
@@ -7866,6 +8029,14 @@ PrefabInstance:
     - target: {fileID: 5671832987880705031, guid: 22454dfecdc4cf24cafaac7fdb7ae138, type: 3}
       propertyPath: m_Name
       value: Basket
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671832987880705031, guid: 22454dfecdc4cf24cafaac7fdb7ae138, type: 3}
+      propertyPath: m_TagString
+      value: RayHovered
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631433067686571052, guid: 22454dfecdc4cf24cafaac7fdb7ae138, type: 3}
+      propertyPath: m_TagString
+      value: RayHovered
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22454dfecdc4cf24cafaac7fdb7ae138, type: 3}
@@ -9367,6 +9538,11 @@ Transform:
   m_Father: {fileID: 754231590}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -72.705, z: 0}
+--- !u!1 &2011610435 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2694756587940724611, guid: 9190d01e5f04eca42acec18241799708, type: 3}
+  m_PrefabInstance: {fileID: 22279015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2048587607
 GameObject:
   m_ObjectHideFlags: 0
@@ -9497,6 +9673,11 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: -5630151704836100654, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   ZAxis: {fileID: 0}
+--- !u!1 &2067701168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2152230273473556306, guid: 8142130b828dbeb4caa6f7d83e4e5b08, type: 3}
+  m_PrefabInstance: {fileID: 775524212}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2075753945
 GameObject:
   m_ObjectHideFlags: 0
