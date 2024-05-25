@@ -5,13 +5,18 @@ using System.Linq;
 
 namespace DataModel
 {
+    [RequireComponent(typeof(InitializeItems))]
     public class GameSession : MonoBehaviour
     {
         [SerializeField] private PlayerData _data;
         public PlayerData Data => _data;
 
+        private InitializeItems _initializeItems;
+
         private void Awake()
         {
+            _initializeItems = GetComponent<InitializeItems>();
+            
             if (IsSessionsExist())
             {
                 DestroyImmediate(gameObject);
@@ -33,6 +38,7 @@ namespace DataModel
         public void AddItem(ItemInfo itemInfo)
         {
             _data.Items.Add(itemInfo);
+            _initializeItems._Initialize();
         }
 
         public void TakeToHands(ItemInfo objectToTake)
@@ -97,11 +103,6 @@ namespace DataModel
             _data.Items.Clear();
         }
         #endregion
-
-        public GameObject GetObjectInHand()
-        {
-            return _data.ObjectInHand;
-        }
 
         public void MakeDecision(int index)
         {

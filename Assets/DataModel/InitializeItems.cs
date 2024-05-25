@@ -1,8 +1,10 @@
-using System;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+using TMPro;
+
+using System;
+using System.Collections.Generic;
 
 namespace DataModel
 {
@@ -13,12 +15,12 @@ namespace DataModel
         private GameSession _session;
         private void Start()
         {
-            _session = FindObjectOfType<GameSession>();
-            Initialize();
+            _session = GetComponent<GameSession>();
+            _Initialize();
         }
 
         [ContextMenu("Initialize")]
-        private void Initialize()
+        public void _Initialize()
         {
             var items = _session.Data.Items;
 
