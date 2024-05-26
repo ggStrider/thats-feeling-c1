@@ -14,16 +14,16 @@ namespace Player
 
         [Space] [SerializeField] private bool _playSoundOnShowing;
         [SerializeField] private PlayRandomSound _playSoundComponent;
-        public bool canCheck;
+        public bool CanCheck;
 
         private bool _showing;
         private static readonly int ShowKey = Animator.StringToHash("show");
 
         public void ToggleAnimation()
         {
-            if (!canCheck) return;
+            if (!CanCheck) return;
             _showing = !_showing;
-            canCheck = false;
+            CanCheck = false;
 
             _animator.SetBool(ShowKey, _showing);
             if (_playSoundOnShowing && _showing)
@@ -36,7 +36,7 @@ namespace Player
         private async void Delay()
         {
             await Task.Delay(_delayBetweenChecking);
-            canCheck = true;
+            CanCheck = true;
         }
     }
 }
