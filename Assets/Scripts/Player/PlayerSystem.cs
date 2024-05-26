@@ -1,7 +1,7 @@
 using UnityEngine;
 
-using Events;
 using InteractFeatures.Hovered;
+using InteractFeatures.Interact;
 
 namespace Player
 {
@@ -15,8 +15,9 @@ namespace Player
 
         [field:SerializeField] public Camera VisionCamera { get; private set; }
         [SerializeField] private CheckObjectsInRay _checkInRay;
-        [SerializeField] private CheckShoppingList _checkShoppingList;
-
+        
+        [Space] [SerializeField] private CheckShoppingList _checkShoppingList;
+        
         private PlayerSetSettings _playerSetSettings;
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -44,10 +45,9 @@ namespace Player
                 playerCamera.forward, _rayCheckDistance);
 
             if (result == null) return;
-            var objectInvokeComponent = result.GetComponent<InvokeUnityEvent>();
+            var interactObject = result.GetComponent<IInteract>();
 
-            if (objectInvokeComponent == null) return;
-            objectInvokeComponent._InvokeEvent();
+            interactObject?.Interact();
         }
 
         public void GetUp()
@@ -94,11 +94,10 @@ namespace Player
             {
                 if (_lastHoveredObject == null) return;
                 NonHoveredOnLastObject();
-                return;
             }
             
             _lastHoveredObject = hit.transform.gameObject.GetComponent<IHovered>();
-            _lastHoveredObject.OnHovered();
+            _lastHoveredObject?.OnHovered();
         }
 
         private void NonHoveredOnLastObject()
