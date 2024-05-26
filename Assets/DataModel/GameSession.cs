@@ -38,7 +38,7 @@ namespace DataModel
         public void AddItem(ItemInfo itemInfo)
         {
             _data.Items.Add(itemInfo);
-            _initializeItems._Initialize();
+            _initializeItems._AddToUI(itemInfo);
         }
 
         public void TakeToHands(ItemInfo objectToTake)
