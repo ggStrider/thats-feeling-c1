@@ -6,6 +6,7 @@ namespace Player
     public class PlayerInputReader : MonoBehaviour
     {
         [SerializeField] private PlayerSystem _playerSystem;
+        [SerializeField] private CheckInventory _checkInventory;
         private PlayerMap _playerMap;
         
         private void Awake()
@@ -18,11 +19,19 @@ namespace Player
             _playerMap.PlayerActionMap.Interact.started += OnInteract;
             _playerMap.PlayerActionMap.CheckShoppingList.started += OnCheckShoppingList;
             _playerMap.PlayerActionMap.GetUp.started += OnGetUp;
+
+            _playerMap.PlayerActionMap.CheckInventory.started += OnCheckInventory;
+            _playerMap.PlayerActionMap.CheckInventory.canceled += OnCheckInventory;
         
             _playerMap.Enable();
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        private void OnCheckInventory(InputAction.CallbackContext obj)
+        {
+            _checkInventory._ToggleCheckAnimation();
         }
 
         // private void OnDestroy()
