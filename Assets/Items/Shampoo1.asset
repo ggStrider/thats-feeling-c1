@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ffc2f8721490e4c906503b5ebaed79, type: 3}
   m_Name: Shampoo1
   m_EditorClassIdentifier: 
-  Name: "\u0436\u0443\u043C\u0430\u0439\u0441\u0438\u043D\u0431\u0430"
+  Name: Shampoo 1
+  Description: "Thats just shampoo. \nlol"
   ItemImage: {fileID: 21300000, guid: 336caefceec668645a5ea79d53573495, type: 3}
   ItemWhenTakeInHand: {fileID: 6271025789090613121, guid: 3dba1746bb39b554781e57cf407c3112, type: 3}
   SizeInHand: {x: 0.3, y: 0.3, z: 0.3}
