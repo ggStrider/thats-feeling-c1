@@ -6,6 +6,7 @@ namespace Items
     public class ItemInfo : ScriptableObject
     {
         public string Name;
+        [TextArea(4,6)] public string Description;
         public Sprite ItemImage;
 
         [Space]
