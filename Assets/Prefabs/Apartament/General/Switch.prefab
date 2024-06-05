@@ -93,14 +93,13 @@ GameObject:
   m_Component:
   - component: {fileID: 366122278815555711}
   - component: {fileID: 62248997}
-  - component: {fileID: 8515687485806520050}
-  - component: {fileID: 8754051972608397992}
+  - component: {fileID: 3518360607148266135}
   - component: {fileID: 7732133065162978610}
   - component: {fileID: 5450906753290422721}
   - component: {fileID: 8039918236427177307}
-  - component: {fileID: 1516341187164366794}
-  - component: {fileID: 62249005}
   - component: {fileID: 7318439712406199525}
+  - component: {fileID: 62249005}
+  - component: {fileID: 1516341187164366794}
   m_Layer: 0
   m_Name: Switch
   m_TagString: RayHovered
@@ -139,7 +138,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.121170044, y: 0.86744726, z: 0.5119284}
   m_Center: {x: 1.7044151, y: 1.230938, z: -0.0009072721}
---- !u!114 &8515687485806520050
+--- !u!114 &3518360607148266135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,48 +147,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1035663989613804229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f8d9cdbf44d03942b46ae5edb671929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8754051972608397992}
-        m_TargetAssemblyTypeName: InteractFeatures.ToggleLight, Assembly-CSharp
-        m_MethodName: _Toggle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _canInvoke: 1
-  _canInvokeOnce: 0
-  _invokeOnStart: 0
-  _deactivateObjectAfterEvent: 0
---- !u!114 &8754051972608397992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035663989613804229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6458ed34f75374d419f0723e56557566, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fc0813ce4efa6141980c667fb31c56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _lightToToggle: {fileID: 0}
-  _intensityOnEnabled: 5
-  _enabled: 0
+  _intensityOnEnabled: 1
+  _enabledLight: 0
   _switcherOnEnabled: {fileID: 3275407461214558971}
   _switcherOnDisabled: {fileID: 5388664503025799275}
   _turnedOnSound: {fileID: 7732133065162978610}
   _turnedOffSound: {fileID: 5450906753290422721}
   _canUse: 1
+  _shouldFlickering: 0
+  _minIntensityForFlickering: 0.3
+  _maxIntensityForFlickering: 1
+  _delayBetweenFlickering: 0.08
 --- !u!114 &7732133065162978610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,19 +308,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &1516341187164366794
-BoxCollider:
+--- !u!114 &7318439712406199525
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035663989613804229}
-  m_Material: {fileID: 13400000, guid: 02e786319621f87459bf5440d3d5502f, type: 2}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.121170044, y: 0.86744726, z: 0.5119284}
-  m_Center: {x: 1.7044151, y: 1.230938, z: -0.0009072721}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d25413bfc56746beb0162dadb9c97c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectToOutline: {fileID: 62249005}
 --- !u!114 &62249005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,19 +339,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &7318439712406199525
-MonoBehaviour:
+--- !u!65 &1516341187164366794
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035663989613804229}
+  m_Material: {fileID: 13400000, guid: 02e786319621f87459bf5440d3d5502f, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d25413bfc56746beb0162dadb9c97c6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectToOutline: {fileID: 62249005}
+  serializedVersion: 2
+  m_Size: {x: 0.121170044, y: 0.86744726, z: 0.5119284}
+  m_Center: {x: 1.7044151, y: 1.230938, z: -0.0009072721}
 --- !u!1 &3275407461214558971
 GameObject:
   m_ObjectHideFlags: 0
