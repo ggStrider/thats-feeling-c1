@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+
 using Utilities;
 
 namespace Sounds
