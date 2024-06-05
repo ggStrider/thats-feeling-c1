@@ -64,6 +64,11 @@ namespace DataModel
 
             return true;
         }
+        
+        public bool IsInventoryContainsParameterOneItem(ItemInfo item)
+        { 
+            return _data.Items.Contains(item);
+        }
 
         public void DeleteItem(ItemInfo item)
         {
@@ -96,6 +101,18 @@ namespace DataModel
             var objectInHand = _data.ObjectInHand;
             _data.ObjectInHand = null;
             Destroy(objectInHand);
+        }
+
+        public void ReplaceItemByAnotherItem(ItemInfo whichItemReplace, ItemInfo itemToSetAsNew)
+        {
+            if (!IsInventoryContainsParameterOneItem(whichItemReplace))
+            {
+                Debug.LogWarning($"Inventory doesn't contains {whichItemReplace} ! Checker: {gameObject}");
+                return;
+            }
+
+            var index = _data.Items.IndexOf(whichItemReplace);
+            _data.Items[index] = itemToSetAsNew;
         }
         
         public void DeleteAllItems()
