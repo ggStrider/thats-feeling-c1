@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
+using Utilities;
+
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
 
-using Utilities;
+using System.Threading.Tasks;
 
 namespace Sounds
 {
@@ -20,18 +21,19 @@ namespace Sounds
         [SerializeField, Range(-3, 3)] private float _maxPitch;
 
         [Space] [SerializeField] private bool _excludeRepeating;
-        private List<AudioClip> _availableClips;
+        [SerializeField] private List<AudioClip> _availableClips;
         
         [Space] [SerializeField] private UnityEvent _onComplete;
 
         private void Awake()
         {
             _availableClips = _clips.ToList();
-                
+            
             if(_source != null) return;
             _source = GetComponent<AudioSource>();
         }
 
+        [ContextMenu("Play")]
         public void _PlayRandomSound()
         {
             if (_randomPitch)
@@ -40,23 +42,50 @@ namespace Sounds
                 _source.pitch = newPitch;
             }
             
-            var clipNumber = GenerateRandomValue.GenerateRandomInt(0, _clips.Length);
             if (_excludeRepeating)
             {
-                _source.clip = _availableClips[GenerateRandomValue.GenerateRandomInt(0, _availableClips.Count)];
-                _source.Play();
-                WaitAndInvoke(clipNumber);
-                
-                return;
+                PlaySoundWithExcluding();
             }
+            else
+            {
+                PlayAnySound();
+            }
+            
+            var clipNumber = GenerateRandomValue.GenerateRandomInt(0, _clips.Length);
             _source.clip = _clips[clipNumber];
             
             _source.Play();
 
-            WaitAndInvoke(clipNumber);
+            CompleteSoundInvoking(clipNumber);
         }
 
-        private async void WaitAndInvoke(int clipNumber)
+        private void PlaySoundWithExcluding()
+        {
+            if (_availableClips.Count == 0)
+            {
+                Debug.Log("Available clips count = 0");
+                return;
+            }
+            var clipNumber = GenerateRandomValue.GenerateRandomInt(0, _availableClips.Count);
+            
+            _source.clip = _clips[clipNumber];
+            _availableClips.Remove(_availableClips[clipNumber]);
+
+            _source.Play();
+            CompleteSoundInvoking(clipNumber);
+        }
+
+        private void PlayAnySound()
+        {
+            var clipNumber = GenerateRandomValue.GenerateRandomInt(0, _clips.Length);
+            
+            _source.clip = _clips[clipNumber];
+
+            _source.Play();
+            CompleteSoundInvoking(clipNumber);
+        }
+
+        private async void CompleteSoundInvoking(int clipNumber)
         {
             await Task.Delay((int)_clips[clipNumber].length * 1000 + 500);
             _onComplete?.Invoke();
