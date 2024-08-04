@@ -44,16 +44,6 @@ namespace Player
         //     KeysUnSubscribe();
         // }
 
-        private void KeysUnSubscribe()
-        {
-            _playerMap.PlayerActionMap.Movement.performed -= OnMovement;
-            _playerMap.PlayerActionMap.Movement.canceled -= OnMovement;
-
-            _playerMap.PlayerActionMap.Interact.started -= OnInteract;
-            _playerMap.PlayerActionMap.CheckShoppingList.started -= OnCheckShoppingList;
-            _playerMap.PlayerActionMap.GetUp.started -= OnGetUp;
-        }
-
         private void OnGetUp(InputAction.CallbackContext obj)
         {
             _playerSystem.GetUp();

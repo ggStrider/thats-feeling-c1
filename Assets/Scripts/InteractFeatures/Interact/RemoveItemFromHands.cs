@@ -1,7 +1,7 @@
-﻿using System;
+﻿using UnityEngine;
+
 using DataModel;
 using Items;
-using UnityEngine;
 
 namespace InteractFeatures.Interact
 {
